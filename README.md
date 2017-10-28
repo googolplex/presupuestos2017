@@ -7,3 +7,4 @@ Lleva un informe elaborado con iReport4.0.1 que se encuentra en el
 servidor de informes. Este es el informe que imprime los presupuestos.
 
 Este es uno de los pocos sistemas de autoconsumo que tengo desarrollados
+usamos openxava 5.4.1 

@@ -6,5 +6,5 @@ cd presupuestos2017
 git config --global user.email "googolplex@lcompras.biz"
 git config --global user.name "googol plex"
 git add -A
-git commit -a -m "presupuestos version 9"
+git commit -a -m "presupuestos version 9 - agrego el informe"
 git push -u origin master

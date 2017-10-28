@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report6" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="384"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/presupuestos/presupuestos"/>
+	<property name="ireport.jasperserver.url" value="http://pecerafeliz/jasperserver/services/repository"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="numero" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     pr_empresaquepresupuesta."celular" AS CELULAR,
+     pr_empresaquepresupuesta."direccion" AS DIRECCION,
+     pr_empresaquepresupuesta."email" AS EMAIL,
+     pr_empresaquepresupuesta."empr_nombre" AS EMPRESA,
+     pr_empresaquepresupuesta."ruc" AS RUC,
+     pr_empresaquepresupuesta."telefono" AS TELEFONO,
+     pr_estadospresupuesto."estado" AS ESTADO,
+     pr_formadepago."formadepago" AS FORMA_PAGO,
+     pr_plazodeentrega."plazodeentrega" AS ENTREGA,
+     pr_plazodegarantia."plazodegarantia" AS GARANTIA,
+     pr_plazosdepago."plazodepago" AS PLAZO_PAGO,
+     pr_presupuestos."atencion" AS ATENCION,
+     UPPER(pr_presupuestos."cargoatencion") AS CARGO_ATENCION,
+     pr_presupuestos."cargofirmante" AS CARGO_FIRMANTE,
+     pr_presupuestos."condiciones_generales" AS CONDICIONES,
+     pr_presupuestos."detalle" AS DETALLES,
+     pr_presupuestos."fchpresupuesto" AS FECHA,
+     pr_presupuestos."firmadopor" AS FIRMANTE,
+     pr_presupuestos."monto" AS MONTO,
+     pr_presupuestos."presupuestonro" AS presupuestonro,
+     pr_tipoiva."tipoiva" AS TIPO_IVA,
+     pr_clientes."cli_nombre" AS CLIENTE,
+     pr_clientes."cli_nombre" AS CLIENTE,
+     pr_clientes."direccion" AS CLIENTE_DIR,
+     pr_clientes."telefono" AS TELEFONO_CLI,
+     pr_clientes."celular" AS CELULAR_CLI
+FROM
+     "public"."pr_clientes" pr_clientes LEFT OUTER JOIN "public"."pr_inventario" pr_inventario ON (pr_clientes."id" = pr_inventario."cliente_id")
+     LEFT OUTER JOIN "public"."pr_presupuestos" pr_presupuestos ON (pr_clientes."id" = pr_presupuestos."cliente_id")
+     LEFT OUTER JOIN "public"."pr_empresaquepresupuesta" pr_empresaquepresupuesta ON (pr_presupuestos."empresa_id" = pr_empresaquepresupuesta."id")
+     LEFT OUTER JOIN "public"."pr_estadospresupuesto" pr_estadospresupuesto ON (pr_presupuestos."estado_id" = pr_estadospresupuesto."id")
+     LEFT OUTER JOIN "public"."pr_formadepago" pr_formadepago ON (pr_presupuestos."formadepago_id" = pr_formadepago."id")
+     LEFT OUTER JOIN "public"."pr_plazodeentrega" pr_plazodeentrega ON (pr_presupuestos."plazodeentrega_id" = pr_plazodeentrega."id")
+     LEFT OUTER JOIN "public"."pr_plazodegarantia" pr_plazodegarantia ON (pr_presupuestos."plazodegarantia_id" = pr_plazodegarantia."id")
+     LEFT OUTER JOIN "public"."pr_plazosdepago" pr_plazosdepago ON (pr_presupuestos."plazosdepago_id" = pr_plazosdepago."id")
+     LEFT OUTER JOIN "public"."pr_tipoiva" pr_tipoiva ON (pr_presupuestos."tipoiva_id" = pr_tipoiva."id")
+
+WHERE
+	pr_presupuestos."presupuestonro" = $P{numero}]]>
+	</queryString>
+	<field name="celular" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="forma_pago" class="java.lang.String"/>
+	<field name="entrega" class="java.lang.String"/>
+	<field name="garantia" class="java.lang.String"/>
+	<field name="plazo_pago" class="java.lang.String"/>
+	<field name="atencion" class="java.lang.String"/>
+	<field name="cargo_atencion" class="java.lang.String"/>
+	<field name="cargo_firmante" class="java.lang.String"/>
+	<field name="condiciones" class="java.lang.String"/>
+	<field name="detalles" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="firmante" class="java.lang.String"/>
+	<field name="monto" class="java.lang.Long"/>
+	<field name="presupuestonro" class="java.lang.Long"/>
+	<field name="tipo_iva" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="cliente_dir" class="java.lang.String"/>
+	<field name="telefono_cli" class="java.lang.String"/>
+	<field name="celular_cli" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="236" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="70" width="415" height="142"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="Title" x="18" y="3" width="263" height="45"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO NRO.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="432" y="55" width="91" height="51"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="12" width="157" height="43"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{presupuestonro}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="6" y="50" width="391" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="432" y="43" width="54" height="12" forecolor="#736343"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="431" y="13" width="36" height="12" forecolor="#736343"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="470" y="13" width="76" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="5" y="74" width="85" height="26" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[EMPRESA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="103" y="74" width="294" height="41"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="51" y="117" width="22" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="83" y="117" width="128" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="13" y="160" width="60" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="83" y="160" width="312" height="52"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="83" y="131" width="174" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="39" y="131" width="33" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[EMAIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="37" y="146" width="35" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[TELEF.:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="83" y="146" width="128" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="217" y="146" width="35" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[CEL.:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="269" y="146" width="107" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{celular}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="152" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="326" y="6" width="226" height="108"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="2" y="1" width="324" height="144"/>
+			</rectangle>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="2" y="0" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="78" y="74" width="168" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cargo_atencion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="14" y="91" width="308" height="43"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente_dir}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="14" y="59" width="56" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ATENCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="11" width="62" height="29" forecolor="#736343"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="73" y="11" width="239" height="29"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="78" y="58" width="176" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atencion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="14" y="74" width="56" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="328" y="18" width="79" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PLAZO ENTREGA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="339" y="35" width="68" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[GARANTIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="355" y="53" width="52" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[P.PAGO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="412" y="18" width="133" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{entrega}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="412" y="35" width="133" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{garantia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="412" y="53" width="133" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{plazo_pago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="346" y="70" width="61" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TIPO_IVA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="412" y="70" width="133" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_iva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="346" y="88" width="61" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FORMA PAGO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="412" y="88" width="133" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{forma_pago}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="210" y="43" width="107" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{celular_cli}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="46" y="43" width="112" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefono_cli}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="168" y="43" width="35" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[CEL.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="5" y="43" width="35" height="12" forecolor="#736343"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[TEL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="2" y="4" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="176" y="5" width="136" height="15" forecolor="#736343"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DETALLES DEL TRABAJO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="4" y="12" width="542" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{detalles}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="5" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="134" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="4" y="60" width="390" height="63"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="Column header" x="8" y="66" width="219" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[PRESUPUESTO FIRMADO POR FIRMANTE:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="36" y="85" width="179" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{firmante}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="34" y="104" width="176" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cargo_firmante}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="63" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="281" y="5" width="208" height="53"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="4" y="5" width="277" height="39"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="16" y="19" width="253" height="25"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{condiciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="39" y="4" width="221" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[OBSERVACIONES GENERALES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0">
+				<reportElement style="Detail" x="315" y="43" width="114" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="292" y="18" width="167" height="15" forecolor="#736343"/>
+				<textElement/>
+				<text><![CDATA[MONTO PRESUPUESTADO]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
